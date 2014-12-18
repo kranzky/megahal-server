@@ -13,5 +13,6 @@ Bundler.require(*Rails.groups)
 module MegahalServer
   class Application < Rails::Application
     config.active_record.raise_in_transactional_callbacks = true
+    config.logger = Hodel3000CompliantLogger.new(config.paths['log'].first)
   end
 end

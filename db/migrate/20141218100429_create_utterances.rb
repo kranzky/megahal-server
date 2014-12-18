@@ -2,7 +2,7 @@ class CreateUtterances < ActiveRecord::Migration
   def change
     create_table :utterances do |t|
       t.references :chat, index: true
-      t.string :type
+      t.string :type, null: false
       t.text :text
       t.timestamps null: false
     end

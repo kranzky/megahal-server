@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 20141218100429) do
   enable_extension "plpgsql"
 
   create_table "chats", force: true do |t|
-    t.string   "user"
-    t.string   "key"
+    t.string   "user",       null: false
+    t.string   "key",        null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20141218100429) do
 
   create_table "utterances", force: true do |t|
     t.integer  "chat_id"
-    t.string   "type"
+    t.string   "type",       null: false
     t.text     "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
