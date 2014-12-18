@@ -10,6 +10,4 @@ gem 'megahal', '~> 1.0.0'
 group :development do
   gem 'awesome_print', '~> 1.2.0'
   gem 'byebug', '~> 3.5.1'
-  gem 'binding_of_caller', '~> 0.7.2'
-  gem 'better_errors', '~> 2.0.0'
 end
