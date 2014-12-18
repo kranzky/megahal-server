@@ -1,0 +1,2 @@
+class Reply < Utterance
+end
