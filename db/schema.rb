@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141218100429) do
+ActiveRecord::Schema.define(version: 20141218231917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,9 +21,19 @@ ActiveRecord::Schema.define(version: 20141218100429) do
     t.string   "key",        null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "job_id"
   end
 
+  add_index "chats", ["job_id"], name: "index_chats_on_job_id", using: :btree
   add_index "chats", ["key"], name: "index_chats_on_key", unique: true, using: :btree
+
+  create_table "jobs", force: true do |t|
+    t.integer  "utterance_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "jobs", ["utterance_id"], name: "index_jobs_on_utterance_id", using: :btree
 
   create_table "utterances", force: true do |t|
     t.integer  "chat_id"
@@ -35,5 +45,7 @@ ActiveRecord::Schema.define(version: 20141218100429) do
 
   add_index "utterances", ["chat_id"], name: "index_utterances_on_chat_id", using: :btree
 
+  add_foreign_key "chats", "jobs"
+  add_foreign_key "jobs", "utterances"
   add_foreign_key "utterances", "chats"
 end
