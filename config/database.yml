@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: megahal_development
+
+test:
+  <<: *default
+  database: megahal_test
+
+production:
+  <<: *default
+  database: megahal_production
+  username: megahal-server
+  password: <%= ENV['MEGAHAL-SERVER_DATABASE_PASSWORD'] %>
