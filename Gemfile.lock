@@ -125,6 +125,7 @@ GEM
     tilt (1.4.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    will_paginate (3.0.7)
 
 PLATFORMS
   ruby
@@ -139,3 +140,4 @@ DEPENDENCIES
   pg (~> 0.17.1)
   rails (~> 4.2.0.rc3)
   responders (~> 2.0.2)
+  will_paginate (~> 3.0.7)
