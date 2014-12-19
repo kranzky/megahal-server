@@ -10,7 +10,7 @@ class MegaHAL
   end
   
   def self.process
-    unless job = Job.first
+    unless job = Job.joins(:utterance).merge(Utterance.where(type: Input)).first
       # TODO: save brain
       sleep(2)
       return

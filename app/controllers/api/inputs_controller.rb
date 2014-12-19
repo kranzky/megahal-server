@@ -3,6 +3,7 @@ module Api
     protect_from_forgery :with => :null_session
     respond_to :json
 
+    rescue_from StandardError, :with => :_server_error
     rescue_from ActionController::ParameterMissing, :with => :_bad_request
     rescue_from ActiveRecord::RecordNotFound, :with => :_not_found
 
@@ -12,6 +13,8 @@ module Api
         render json: ["timed out"], :status => :gone
       elsif chat.busy?
         render json: ["waiting for reply"], :status => :method_not_allowed
+      elsif chat.pending?
+        render json: ["reply is ready"], :status => :method_not_allowed
       else
         @input = chat.input(params.permit(:text)[:text])
         render :show, :status => :created
@@ -19,6 +22,10 @@ module Api
     end
 
     private
+
+    def _server_error(e)
+      render json: ["dag nabbit"], :status => :internal_server_error
+    end
 
     def _bad_request(e)
       render json: [e.message], :status => :bad_request
