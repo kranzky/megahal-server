@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require 'daemons'
+
+APP_PATH = File.expand_path('../../config/application', __FILE__)
+
+options =
+  {
+    :dir_mode => :script,
+    dir: File.expand_path('../../log', __FILE__),
+    backtrace: true,
+    monitor: true
+  }
+
+Daemons.run_proc("megahald", options) do
+  require_relative '../config/environment'
+  require_relative '../lib/megahal'
+  MegaHAL::init
+  loop do
+    MegaHAL::process
+  end
+end
