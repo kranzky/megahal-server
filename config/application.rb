@@ -15,5 +15,8 @@ module MegahalServer
     config.active_record.raise_in_transactional_callbacks = true
     config.logger = Hodel3000CompliantLogger.new(config.paths['log'].first)
     config.time_zone = 'UTC'
+    config.after_initialize do
+      ActiveRecord::Base.logger = nil
+    end
   end
 end
