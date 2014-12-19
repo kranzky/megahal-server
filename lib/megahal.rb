@@ -10,12 +10,19 @@ class MegaHAL
   end
   
   def self.process
-    unless job = Job.joins(:utterance).merge(Utterance.where(type: Input)).first
+    unless job = _get_job
       # TODO: save brain
       sleep(2)
       return
     end
+    debugger
     job.chat.reply(instance.reply(job.utterance.try(:text)))
     Rails.logger.info "[MH] Processed Job"
+  end
+
+  private
+
+  def self._get_job
+    Job.where(utterance: nil).first || Job.joins(:utterance).merge(Utterance.where(type: Input)).first
   end
 end
