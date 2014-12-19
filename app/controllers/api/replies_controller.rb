@@ -1,5 +1,5 @@
 module Api
-  class InputsController < ApplicationController
+  class RepliesController < ApplicationController
     protect_from_forgery :with => :null_session
     respond_to :json
 
@@ -13,7 +13,7 @@ module Api
       elsif chat.busy?
         render json: ["waiting for reply"], :status => :method_not_allowed
       else
-        @input = chat.input(params.permit(:text)[:text])
+        @reply = chat.last_reply
         render :show, :status => :created
       end
     end
