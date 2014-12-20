@@ -8,6 +8,7 @@ gem 'hodel_3000_compliant_logger', '~> 0.1.1'
 gem 'megahal', '~> 1.0.0'
 gem 'daemons', '~> 1.1.9'
 gem 'will_paginate', '~> 3.0.7'
+gem 'jquery-rails', '~> 4.0.2'
 gem 'twitter-bootstrap-rails', '~> 3.2.0'
 
 group :development do
