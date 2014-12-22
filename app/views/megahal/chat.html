@@ -28,6 +28,24 @@
 
 <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
   <div class="container">
-    <input type="text" id="input" class="form-control" placeholder="Say something...">
+    <input type="text" id="input" class="form-control" placeholder="Say something..." disabled="disabled">
   </div>
 </nav>
+
+<div class="modal fade" id="username" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form id="name">
+          <input type="text" id="name" class="form-control" placeholder="Enter your name...">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    MegaHAL.init();
+  });
+</script>

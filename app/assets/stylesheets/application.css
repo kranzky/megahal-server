@@ -49,3 +49,17 @@ body { padding-top: 70px; }
 
 .user {
 }
+
+.modal-dialog { 
+  position: absolute; 
+  top: auto; 
+  bottom: 0; 
+  left: 0; 
+  right: 0; 
+  margin: 6px auto;
+}
+
+.modal.fade:not(.in) .modal-dialog {
+  -webkit-transform: translate3d(0, 125%, 0);
+  transform: translate3d(0, 125%, 0);
+}
