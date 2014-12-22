@@ -12,7 +12,7 @@
     });
     $("form#name").on("submit", function(){
       $("#username").modal('hide');
-      MegaHAL.chat($("input#name").val());
+      MegaHAL.chat($("input#name").val() || "Anon");
       return false;
     });
     $("form#user").on("submit", function(){
@@ -32,6 +32,7 @@
     });
     request.done(function(data) {
       MegaHAL.key = data.chat.key;
+      MegaHAL.name = name;
       $("#log").append('<div class="utterance alert alert-success role="alert"><span class="name">' + name + ':</span> Started a new chat.</div>');
       window.onbeforeunload = function(e) {
         return 'Your chat with MegaHAL will end.';
@@ -78,7 +79,7 @@
       dataType: "json"
     });
     request.done(function(data) {
-      $("#log").append('<p class="user utterance"><span class="name">User:</span> ' + text + '</p>');
+      $("#log").append('<p class="user utterance"><span class="name">' + MegaHAL.name + ':</span> ' + text + '</p>');
       setTimeout("MegaHAL.ping();", 800);
       $('body').scrollTop($('body')[0].scrollHeight);
     });
