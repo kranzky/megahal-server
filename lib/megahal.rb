@@ -15,7 +15,6 @@ class MegaHAL
       sleep(2)
       return
     end
-    debugger
     job.chat.reply(instance.reply(job.utterance.try(:text)))
     Rails.logger.info "[MH] Processed Job"
   end
