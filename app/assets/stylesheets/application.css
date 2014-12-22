@@ -30,6 +30,11 @@ body { padding-top: 70px; }
   display: none;
 }
 
+#spinner {
+  margin-top: 30px;
+  display: none;
+}
+
 #log {
   margin-bottom: 100px;
 }

@@ -12,11 +12,13 @@
     });
     $("form#name").on("submit", function(){
       $("#username").modal('hide');
+      $("#spinner").show();
       MegaHAL.chat($("input#name").val() || "Anon");
       return false;
     });
     $("form#user").on("submit", function(){
       $("#input").hide();
+      $("#spinner").show();
       MegaHAL.user($("#input").val());
       return false;
     });
@@ -61,6 +63,7 @@
       reply = data.reply.text;
       $("#log").append('<p class="mh10 utterance"><span class="name">MegaHAL:</span> ' + reply + '</p>');
       $("#input").val("");
+      $("#spinner").hide();
       $("#input").show();
       $("#input").focus();
       $('body').scrollTop($('body')[0].scrollHeight);
