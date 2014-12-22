@@ -4,10 +4,12 @@ require 'daemons'
 
 APP_PATH = File.expand_path('../../config/application', __FILE__)
 
+working_dir = File.expand_path('../../log', __FILE__)
+
 options =
   {
     :dir_mode => :script,
-    dir: File.expand_path('../../log', __FILE__),
+    dir: working_dir,
     backtrace: true,
     monitor: true
   }
@@ -15,7 +17,7 @@ options =
 Daemons.run_proc("megahald", options) do
   require_relative '../config/environment'
   require_relative '../lib/megahal'
-  MegaHAL::init
+  MegaHAL::init(working_dir)
   loop do
     MegaHAL::process
   end
