@@ -48,9 +48,11 @@
   MegaHAL.ping = function() {
     // TODO: keep pinging until we receive it
     // TODO: show spinner while pinging
-    // TODO: enable input after pinging
+    $("#input").show();
+    $("#input").focus();
   };
   MegaHAL.user = function(input) {
+    $("#input").hide();
     // TODO: send input
     MegaHAL.ping();
   };

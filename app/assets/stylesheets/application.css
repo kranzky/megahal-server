@@ -27,6 +27,7 @@ body { padding-top: 70px; }
 
 #input {
   margin-top: 25px;
+  display: none;
 }
 
 #log {
