@@ -30,6 +30,9 @@
     request.done(function(data) {
       MegaHAL.key = data.chat.key;
       $("#log").append('<div class="utterance alert alert-success role="alert"><span class="name">' + name + ':</span> Started a new chat.</div>');
+      window.onbeforeunload = function(e) {
+        return 'Your chat with MegaHAL will end.';
+      };
       $('body').scrollTop($('body')[0].scrollHeight);
       MegaHAL.ping();
     });
