@@ -10,6 +10,7 @@ gem 'daemons', '~> 1.1.9'
 gem 'will_paginate', '~> 3.0.7'
 gem 'jquery-rails', '~> 4.0.2'
 gem 'twitter-bootstrap-rails', '~> 3.2.0'
+gem 'uglifier', '~> 2.6.0'
 
 group :development do
   gem 'awesome_print', '~> 1.2.0'

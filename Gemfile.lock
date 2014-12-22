@@ -135,6 +135,9 @@ GEM
       railties (~> 4.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    uglifier (2.6.0)
+      execjs (>= 0.3.0)
+      json (>= 1.8.0)
     will_paginate (3.0.7)
 
 PLATFORMS
@@ -152,4 +155,5 @@ DEPENDENCIES
   rails (~> 4.2.0)
   responders (~> 2.0.2)
   twitter-bootstrap-rails (~> 3.2.0)
+  uglifier (~> 2.6.0)
   will_paginate (~> 3.0.7)

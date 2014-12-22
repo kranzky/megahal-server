@@ -4,3 +4,4 @@
 /tmp
 .powenv
 /bin/megahal
+vendor/bundle
