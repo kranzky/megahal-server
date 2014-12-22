@@ -35,7 +35,8 @@
     request.done(function(data) {
       MegaHAL.key = data.chat.key;
       MegaHAL.name = name;
-      $("#log").append('<div class="utterance alert alert-success role="alert"><span class="name">' + name + ':</span> Started a new chat.</div>');
+      $("#log").append('<div class="utterance alert alert-success role="alert"><span class="name"></span> Started a new chat.</div>');
+      $("#log").children().last().find(".name").text(name + ":");
       window.onbeforeunload = function(e) {
         return 'Your chat with MegaHAL will end.';
       };
@@ -45,7 +46,8 @@
     request.fail(function(jqXHR, textStatus, errorThrown) {
       data = jqXHR.responseJSON;
       for (i = 0; i < data.length; i++) {
-        $("#log").append('<div class="utterance alert alert-danger role="alert"><span class="name">Error:</span> ' + data[i] + '</div>');
+        $("#log").append('<div class="utterance alert alert-danger role="alert"><span class="name">Error:</span> <span class="message"></span></div>');
+        $("#log").children().last().find(".message").text(data[i]);
       }
       $('body').scrollTop($('body')[0].scrollHeight);
     });
@@ -61,7 +63,8 @@
     request.done(function(data) {
       _gaq.push(['_trackPageview', "api/replies"])
       reply = data.reply.text;
-      $("#log").append('<p class="mh10 utterance"><span class="name">MegaHAL:</span> ' + reply + '</p>');
+      $("#log").append('<p class="mh10 utterance"><span class="name">MegaHAL:</span> <span class="message"></span></p>');
+      $("#log").children().last().find(".message").text(reply);
       $("#input").val("");
       $("#spinner").hide();
       $("#input").show();
@@ -82,14 +85,17 @@
       dataType: "json"
     });
     request.done(function(data) {
-      $("#log").append('<p class="user utterance"><span class="name">' + MegaHAL.name + ':</span> ' + text + '</p>');
+      $("#log").append('<p class="user utterance"><span class="name"></span> <span class="message"></span></p>');
+      $("#log").children().last().find(".name").text(MegaHAL.name + ":");
+      $("#log").children().last().find(".message").text(text);
       setTimeout("MegaHAL.ping();", 800);
       $('body').scrollTop($('body')[0].scrollHeight);
     });
     request.fail(function(jqXHR, textStatus, errorThrown) {
       data = jqXHR.responseJSON;
       for (i = 0; i < data.length; i++) {
-        $("#log").append('<div class="utterance alert alert-danger role="alert"><span class="name">Error:</span> ' + data[i] + '</div>');
+        $("#log").append('<div class="utterance alert alert-danger role="alert"><span class="name">Error:</span> <span class="message"></span></div>');
+        $("#log").children().last().find(".message").text(data[i]);
       }
       $('body').scrollTop($('body')[0].scrollHeight);
     });
