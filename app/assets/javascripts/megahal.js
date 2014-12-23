@@ -22,6 +22,9 @@
       MegaHAL.user($("#input").val());
       return false;
     });
+    $(window).resize(function() {
+      MegaHAL.scroll();
+    });
   };
   MegaHAL.chat = function(name) {
     _gaq.push(['_trackPageview', "api/chats"])
@@ -40,7 +43,7 @@
       window.onbeforeunload = function(e) {
         return 'Your chat with MegaHAL will end.';
       };
-      $('body').scrollTop($('body')[0].scrollHeight);
+      MegaHAL.scroll();
       setTimeout("MegaHAL.ping();", 800);
     });
     request.fail(function(jqXHR, textStatus, errorThrown) {
@@ -49,7 +52,7 @@
         $("#log").append('<div class="utterance alert alert-danger role="alert"><span class="name">Error:</span> <span class="message"></span></div>');
         $("#log").children().last().find(".message").text(data[i]);
       }
-      $('body').scrollTop($('body')[0].scrollHeight);
+      MegaHAL.scroll();
     });
   };
   MegaHAL.ping = function() {
@@ -69,7 +72,7 @@
       $("#spinner").hide();
       $("#input").show();
       $("#input").focus();
-      $('body').scrollTop($('body')[0].scrollHeight);
+      MegaHAL.scroll();
     });
     request.fail(function(jqXHR, textStatus, errorThrown) {
       setTimeout("MegaHAL.ping();", 800)
@@ -89,7 +92,7 @@
       $("#log").children().last().find(".name").text(MegaHAL.name + ":");
       $("#log").children().last().find(".message").text(text);
       setTimeout("MegaHAL.ping();", 800);
-      $('body').scrollTop($('body')[0].scrollHeight);
+      MegaHAL.scroll();
     });
     request.fail(function(jqXHR, textStatus, errorThrown) {
       data = jqXHR.responseJSON;
@@ -97,7 +100,12 @@
         $("#log").append('<div class="utterance alert alert-danger role="alert"><span class="name">Error:</span> <span class="message"></span></div>');
         $("#log").children().last().find(".message").text(data[i]);
       }
-      $('body').scrollTop($('body')[0].scrollHeight);
+      MegaHAL.scroll();
     });
+  };
+  MegaHAL.scroll = function() {
+    setTimeout(function() {
+      $('body').animate({"scrollTop": $('body')[0].scrollHeight}, 'fast');
+    }, 200);
   };
 }(jQuery))
