@@ -38,7 +38,7 @@
     request.done(function(data) {
       MegaHAL.key = data.chat.key;
       MegaHAL.name = name;
-      $("#log").append('<div class="utterance alert alert-success role="alert"><span class="name"></span> Started a new chat.</div>');
+      $("#log").append('<div class="utterance alert alert-success role="alert"><span class="name"></span> started a new chat.</div>');
       $("#log").children().last().find(".name").text(name + ":");
       window.onbeforeunload = function(e) {
         return 'Your chat with MegaHAL will end.';

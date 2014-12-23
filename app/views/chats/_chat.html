@@ -1,0 +1,5 @@
+<tr data-id="<%= chat.id %>">
+  <td><%= time_ago_in_words(chat.created_at).capitalize %> ago</td>
+  <td><%= chat.user %></td>
+  <td><%= distance_of_time_in_words(chat.created_at, chat.updated_at).capitalize %></td>
+</tr>
