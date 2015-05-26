@@ -1,4 +1,3 @@
-[![Gratipay](https://img.shields.io/gratipay/Kranzky.svg)](https://gratipay.com/Kranzky/)
 [![Dependency Status](https://gemnasium.com/jasonhutchens/megahal-server.png)](https://gemnasium.com/jasonhutchens/megahal-server)
 
 MegaHAL Server
