@@ -1,2 +1,12 @@
-<h1>Chat#index</h1>
-<p>Find me in app/views/chat/index.html.erb</p>
+<h1>MegaHAL 9000</h1>
+
+<%= turbo_frame_tag "chat" do %>
+  <p>(silence)</p>
+<% end %>
+
+<%= turbo_frame_tag "user" do %>
+  <p>What is your name, human?</p>
+  <%= form_with url: chat_say_path do |form| %>
+    <button type="submit" data-action="name#submit:once">Continue</button>
+  <% end %>
+<% end %>

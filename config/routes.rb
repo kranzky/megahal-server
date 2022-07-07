@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   get 'chat/index'
-  get 'chat/say'
+  post 'chat/say'
   root "chat#index"
 end
