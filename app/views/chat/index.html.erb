@@ -2,14 +2,15 @@
 
 <%= turbo_stream_from "chat" %>
 
-<%= turbo_frame_tag "messages" do %>
-  <h3>(MegaHAL joins the chat)</h3>
-<% end %>
-
-<%= turbo_frame_tag "chat" do %>
-  <h2>What is your name, human?</h2>
-  <%= form_with url: chat_say_path do |form| %>
-    <%= form.label :name, "Your Name:" %>
-    <%= form.text_field :name, autofocus: true %>
+<div data-controller="chat">
+  <%= turbo_frame_tag "messages" do %>
+    <h3>(MegaHAL joins the chat)</h3>
   <% end %>
-<% end %>
+
+  <%= turbo_frame_tag "chat" do %>
+    <%= form_with url: chat_say_path do |form| %>
+      <%= form.label :name, "Your Name:" %>
+      <%= form.text_field :name, placeholder: "What is your name, human?", autofocus: true %>
+    <% end %>
+  <% end %>
+</div>
