@@ -6,9 +6,9 @@
 
 <turbo-stream action="replace" target="chat">
   <template>
-    <%= form_with url: chat_say_path, data: { controller: "chat", action: "turbo:submit-end->chat#clear"} do |form| %>
+    <%= form_with url: chat_say_path, data: { controller: "chat", action: "turbo:submit-start->chat#echo" } do |form| %>
       <%= form.hidden_field :name, value: @name %>
-      <%= form.text_field :message, placeholder: "Type a message!" %>
+      <%= form.text_field :message, placeholder: "Type a message!", data: { controller: "message", action: "urbo:submit-end->chat#enable" } %>
     <% end %>
   </template>
 </turbo-stream>
