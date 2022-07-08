@@ -5,7 +5,13 @@ export default class extends Controller {
     this.element.elements.message.focus()
   }
 
+  enable() {
+    this.element.elements.message.disabled = false
+    this.element.elements.message.focus()
+  }
+
   echo() {
+    this.element.elements.message.disabled = true
     let name = this.element.elements.name.value
     let message = this.element.elements.message.value
     if (message.trim().length == 0)
