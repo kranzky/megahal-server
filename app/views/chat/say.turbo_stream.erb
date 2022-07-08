@@ -1,0 +1,14 @@
+<turbo-stream action="append" target="messages">
+  <template>
+    <h3>Magic</h3>
+  </template>
+</turbo-stream>
+
+<turbo-stream action="replace" target="chat">
+  <template>
+    <h2>Say something<h2>
+    <%= form_with url: chat_say_path do |form| %>
+      <button type="submit">Submit</button>
+    <% end %>
+  </template>
+</turbo-stream>

@@ -1,12 +1,14 @@
 <h1>MegaHAL 9000</h1>
 
-<%= turbo_frame_tag "chat" do %>
-  <p>(silence)</p>
+<%= turbo_stream_from "chat" %>
+
+<%= turbo_frame_tag "messages" do %>
+  <h2>Messages</h2>
 <% end %>
 
-<%= turbo_frame_tag "user" do %>
-  <p>What is your name, human?</p>
+<%= turbo_frame_tag "chat" do %>
+  <h2>What is your name, human?</h2>
   <%= form_with url: chat_say_path do |form| %>
-    <button type="submit" data-action="name#submit:once">Continue</button>
+    <button type="submit">Start Chatting</button>
   <% end %>
 <% end %>
