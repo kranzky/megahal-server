@@ -1,14 +1,19 @@
 <turbo-stream action="append" target="messages">
   <template>
-    <h3>Magic</h3>
+    <% if @message.nil? %>
+      <h3>(<%= @name %> joins the chat)</h3>
+    <% else %>
+      <h3><%= @name %>: <%= @message %></h3>
+    <% end %>
+    <h3>MegaHAL: <%= @response %></h3>
   </template>
 </turbo-stream>
 
 <turbo-stream action="replace" target="chat">
   <template>
-    <h2>Say something<h2>
     <%= form_with url: chat_say_path do |form| %>
-      <button type="submit">Submit</button>
+      <%= form.hidden_field :name, value: @name %>
+      <%= form.text_field :message %>
     <% end %>
   </template>
 </turbo-stream>

@@ -3,12 +3,13 @@
 <%= turbo_stream_from "chat" %>
 
 <%= turbo_frame_tag "messages" do %>
-  <h2>Messages</h2>
+  <h3>(MegaHAL joins the chat)</h3>
 <% end %>
 
 <%= turbo_frame_tag "chat" do %>
   <h2>What is your name, human?</h2>
   <%= form_with url: chat_say_path do |form| %>
-    <button type="submit">Start Chatting</button>
+    <%= form.label :name, "Your Name:" %>
+    <%= form.text_field :name, autofocus: true %>
   <% end %>
 <% end %>
