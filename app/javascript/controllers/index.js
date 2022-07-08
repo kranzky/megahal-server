@@ -9,3 +9,6 @@ application.register("chat", ChatController)
 
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
+
+import NameController from "./name_controller.js"
+application.register("name", NameController)

@@ -3,14 +3,11 @@ class ChatController < ApplicationController
   end
 
   def say
+    @start = params[:start] == 'true'
     @name = params[:name]
     @message = params[:message]
-    if @message.present?
-      @response = "Why you say '#{@message}'?"
-    else
-      @response = "Hello #{@name}!" 
-    end
-    @message = "..." if @message&.length == 0
+    @response = @start ? "Hello #{@name}!" : "Why you say '#{@message}'?"
+    @message = "..." if @message.blank?
     respond_to do |format|
       format.turbo_stream
     end
