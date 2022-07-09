@@ -21,7 +21,7 @@ export default class extends Controller {
     if (message.trim().length == 0)
       message = "..."
     let frame = document.getElementById("messages")
-    frame.insertAdjacentHTML("beforeend", `<h3>${name}: ${message}</h3>`)
+    frame.insertAdjacentHTML("beforeend", `<h3 class="text-blue-400">${name}: ${message}</h3>`)
     this.element.reset()
     let messages = document.getElementById("messages").parentElement
     messages.scrollTop = messages.scrollHeight

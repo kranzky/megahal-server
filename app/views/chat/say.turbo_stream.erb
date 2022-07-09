@@ -1,6 +1,6 @@
 <turbo-stream action="append" target="messages">
   <template>
-    <h3>MegaHAL: <%= @response %></h3>
+    <p class="text-green-400">MegaHAL: <%= @response %></p>
   </template>
 </turbo-stream>
 
@@ -8,7 +8,7 @@
   <template>
     <%= form_with url: chat_say_path, data: { controller: "chat", action: "turbo:submit-start->chat#echo turbo:before-fetch-response->chat#enable" } do |form| %>
       <%= form.hidden_field :name, value: @name %>
-      <%= form.text_field :message, placeholder: "Say something!", class: "w-full" %>
+      <%= form.text_field :message, placeholder: "Say something!", class: "w-full rounded-lg text-2xl bg-gray-700 text-white p-1 focus:outline-0" %>
     <% end %>
   </template>
 </turbo-stream>
