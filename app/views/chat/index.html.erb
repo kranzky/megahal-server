@@ -1,15 +1,15 @@
-<div class="flex flex-col h-screen w-screen">
-  <header class="bg-red-500 sticky">
-    <h1>MegaHAL 9000</h1>
-  </header>
+<div class="flex flex-col h-screen w-screen overflow-hidden">
+  <nav class="sticky top-0 bg-blue-600 p-5 drop-shadow shadow-blue-600">
+    <h1 class="text-white text-4xl text-center">MegaHAL</h1>
+  </nav>
 
-  <main class="bg-green-500 grow">
+  <main class="bg-green-500 h-screen overflow-y-scroll">
     <%= turbo_frame_tag "messages" do %>
       <h3>(MegaHAL joins the chat)</h3>
     <% end %>
   </main>
 
-  <footer class="bg-blue-500 sticky top-[100vh]">
+  <footer class="bg-red-500 h-30 p-10">
     <%= turbo_frame_tag "chat" do %>
       <%= form_with url: chat_say_path, data: { controller: "name", action: "turbo:submit-start->name#echo" } do |form| %>
         <%= form.hidden_field :start, value: true %>

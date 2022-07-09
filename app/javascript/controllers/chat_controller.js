@@ -6,8 +6,10 @@ export default class extends Controller {
   }
 
   enable() {
-    this.element.elements.message.disabled = false
-    this.element.elements.message.focus()
+    setTimeout(() => {
+      this.element.elements.message.disabled = false
+      this.element.elements.message.focus()
+    })
   }
 
   echo() {
