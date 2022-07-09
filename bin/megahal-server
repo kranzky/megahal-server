@@ -1,0 +1,12 @@
+#!/usr/bin/env rails runner
+
+redis = Redis.new(url: ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" })
+
+while true
+  redis.scan_each(match: "megahal-message:*").each do |key|
+    data = JSON.parse(redis.getdel(key), symbolize_names: true)
+    key.gsub!("-message:", "-reply:")
+    redis.set(key, "reply from megahal")
+  end
+  sleep 0.1
+end
