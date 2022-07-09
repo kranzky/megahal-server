@@ -9,7 +9,9 @@ export default class extends Controller {
     setTimeout(() => {
       this.element.elements.message.disabled = false
       this.element.elements.message.focus()
-    })
+      let messages = document.getElementById("messages").parentElement
+      messages.scrollTop = messages.scrollHeight
+    }, 100)
   }
 
   echo() {
@@ -21,5 +23,7 @@ export default class extends Controller {
     let frame = document.getElementById("messages")
     frame.insertAdjacentHTML("beforeend", `<h3>${name}: ${message}</h3>`)
     this.element.reset()
+    let messages = document.getElementById("messages").parentElement
+    messages.scrollTop = messages.scrollHeight
   }
 }

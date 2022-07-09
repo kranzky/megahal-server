@@ -11,7 +11,7 @@
 
   <footer class="bg-red-500 h-30 p-10">
     <%= turbo_frame_tag "chat" do %>
-      <%= form_with url: chat_say_path, data: { controller: "name", action: "turbo:submit-start->name#echo" } do |form| %>
+      <%= form_with url: chat_say_path, data: { controller: "name", action: "turbo:submit-start->name#echo submit->name#check" } do |form| %>
         <%= form.hidden_field :start, value: true %>
         <%= form.text_field :name, placeholder: "What is your name, human?", class: "w-full" %>
       <% end %>

@@ -8,7 +8,7 @@
   <template>
     <%= form_with url: chat_say_path, data: { controller: "chat", action: "turbo:submit-start->chat#echo turbo:before-fetch-response->chat#enable" } do |form| %>
       <%= form.hidden_field :name, value: @name %>
-      <%= form.text_field :message, placeholder: "Type a message!", class: "w-full" %>
+      <%= form.text_field :message, placeholder: "Say something!", class: "w-full" %>
     <% end %>
   </template>
 </turbo-stream>
