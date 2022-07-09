@@ -1,0 +1,21 @@
+<div class="flex flex-col h-screen w-screen overflow-hidden">
+  <nav class="sticky top-0 bg-gray-700 p-3 drop-shadow">
+    <h1 class="text-gray-300 text-2xl text-center">MegaHAL</h1>
+  </nav>
+
+  <main class="bg-black h-screen overflow-y-scroll p-5 text-xl">
+    <%= turbo_frame_tag "messages" do %>
+      <p class="text-yellow-500">(MegaHAL joins the chat)</p>
+    <% end %>
+  </main>
+
+  <footer class="bg-gray-800 h-30 p-5">
+    <%= turbo_frame_tag "chat" do %>
+      <%= form_with url: chat_say_path, data: { controller: "name", action: "turbo:submit-start->name#echo submit->name#check" } do |form| %>
+        <%= form.hidden_field :start, value: true %>
+        <%= form.text_field :name, placeholder: "What is your name, human?", class: "w-full rounded-lg text-2xl bg-gray-700 text-white p-1 focus:outline-0" %>
+      <% end %>
+    <% end %>
+  </footer>
+</div>
+<%= turbo_stream_from "chat" %>
