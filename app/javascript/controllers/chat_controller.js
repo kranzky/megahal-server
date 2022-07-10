@@ -8,6 +8,7 @@ export default class extends Controller {
   enable() {
     setTimeout(() => {
       this.element.elements.message.disabled = false
+      this.element.reset()
       this.element.elements.message.focus()
       let messages = document.getElementById("messages").parentElement
       messages.scrollTop = messages.scrollHeight
@@ -22,7 +23,6 @@ export default class extends Controller {
       message = "..."
     let frame = document.getElementById("messages")
     frame.insertAdjacentHTML("beforeend", `<p class="text-blue-400">${name}: ${message}</p>`)
-    this.element.reset()
     let messages = document.getElementById("messages").parentElement
     messages.scrollTop = messages.scrollHeight
   }

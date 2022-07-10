@@ -2,36 +2,41 @@
 
 redis = Redis.new(url: ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" })
 
+megahal = MegaHAL.new
+
+dir = "."
+brain_path = File.join(dir, "megahal.brn")
+megahal.clear
+megahal.load(brain_path) if File.exists?(brain_path)
+
+log_path = File.join(dir, "megahal.log")
+
 modified = false
 last_modified = DateTime.now.utc
 
-# load the brain
-
 while true
   redis.scan_each(match: "megahal-message:*").each do |key|
-    # suppress exceptions
     data = JSON.parse(redis.getdel(key), symbolize_names: true)
     received = Time.now.utc
     sent = Time.at(data[:time].to_f).utc
     name = data[:name]
     message = data[:message]
-    response = "Why you say #{message}?"
+    response = megahal.reply(message)
     key.gsub!("-message:", "-reply:")
     redis.set(key, response)
     if (last_modified.to_date.mjd != sent.to_date.mjd)
-      # copy "log.txt" to "log_#{last_modified.to_date}.txt"
-      # delete "log.txt"
+      FileUtils.mv(log_path, log_path.gsub("log", "log_#{last_modified.to_date}"))
+      FileUtils.rm(log_path)
     end
-    # append to "log.txt"
-    puts "#{sent.iso8601}:#{name}|#{message}"
-    puts "#{received.iso8601}:MegaHAL|#{response}"
+    File.write(log_path, "#{sent.iso8601}|#{name}|#{message}\n", mode: "a+")
+    File.write(log_path, "#{received.iso8601}|MegaHAL|#{response}\n", mode: "a+")
     modified = true
     last_modified = received.to_datetime
   end
   elapsed = DateTime.now.utc - last_modified
   if modified && elapsed > 30
-    # save the brain
-    puts "SAVE"
+    FileUtils.mv(brain_path, brain_path.gsub("brn", "bak")) if File.exists?(brain_path)
+    megahal.save(brain_path)
     modified = false
   else
     sleep 0.1

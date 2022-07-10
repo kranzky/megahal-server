@@ -16,6 +16,5 @@ export default class extends Controller {
     let name = this.element.elements.name.value
     let frame = document.getElementById("messages")
     frame.insertAdjacentHTML("beforeend", `<p class="text-yellow-500">(${name} joins the chat)</p>`)
-    this.element.reset()
   }
 }
