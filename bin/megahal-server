@@ -1,15 +1,17 @@
 #!/usr/bin/env rails runner
 
 redis = Redis.new(url: ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" })
+root_path = ENV.fetch("MOUNT_PATH") { Rails.root.to_s }
 
 megahal = MegaHAL.new
-
-dir = "."
-brain_path = File.join(dir, "megahal.brn")
 megahal.clear
-megahal.load(brain_path) if File.exists?(brain_path)
 
-log_path = File.join(dir, "megahal.log")
+log_path = File.join(root_path, "log", "megahal.log")
+FileUtils.mkdir_p(File.dirname(log_path))
+
+brain_path = File.join(root_path, "db", "megahal.brn")
+FileUtils.mkdir_p(File.dirname(brain_path))
+megahal.load(brain_path) if File.exists?(brain_path)
 
 modified = false
 last_modified = DateTime.now.utc
