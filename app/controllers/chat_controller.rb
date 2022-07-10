@@ -19,7 +19,7 @@ class ChatController < ApplicationController
   def _megahal
     epoch = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     key = "megahal-message:#{SecureRandom.uuid}"
-    data = { user: @name, message: @message }
+    data = { time: Time.now.to_f, name: @name, message: @message }
     @redis.set(key, data.to_json)
     key.gsub!("-message:", "-reply:")
     while Process.clock_gettime(Process::CLOCK_MONOTONIC) - epoch < 10
