@@ -1,7 +1,11 @@
-#!/usr/bin/env rails runner
+#!/usr/bin/env ruby
+
+require 'redis'
+require 'megahal'
+require 'date'
 
 redis = Redis.new(url: ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" })
-root_path = ENV.fetch("MOUNT_PATH") { Rails.root.to_s }
+root_path = ENV.fetch("MOUNT_PATH") { File.dirname(__dir__) }
 
 megahal = MegaHAL.new
 megahal.clear
@@ -14,7 +18,7 @@ FileUtils.mkdir_p(File.dirname(brain_path))
 megahal.load(brain_path) if File.exists?(brain_path)
 
 modified = false
-last_modified = DateTime.now.utc
+last_modified = Time.now.utc
 
 while true
   redis.scan_each(match: "megahal-message:*").each do |key|
@@ -30,12 +34,12 @@ while true
       FileUtils.mv(log_path, log_path.gsub("log", "log_#{last_modified.to_date}"))
       FileUtils.rm(log_path)
     end
-    File.write(log_path, "#{sent.iso8601}|#{name}|#{message}\n", mode: "a+")
-    File.write(log_path, "#{received.iso8601}|MegaHAL|#{response}\n", mode: "a+")
+    File.write(log_path, "#{sent.to_datetime.iso8601}|#{name}|#{message}\n", mode: "a+")
+    File.write(log_path, "#{received.to_datetime.iso8601}|MegaHAL|#{response}\n", mode: "a+")
     modified = true
-    last_modified = received.to_datetime
+    last_modified = received
   end
-  elapsed = DateTime.now.utc - last_modified
+  elapsed = Time.now.utc - last_modified
   if modified && elapsed > 30
     FileUtils.mv(brain_path, brain_path.gsub("brn", "bak")) if File.exists?(brain_path)
     megahal.save(brain_path)

@@ -1,3 +1,5 @@
-#!/usr/bin/env rails runner
+#!/usr/bin/env ruby
+
+require 'daemons'
 
 Daemons.run(File.join(__dir__, "megahal-server"))
