@@ -30,9 +30,8 @@ while true
     response = megahal.reply(message)
     key.gsub!("-message:", "-reply:")
     redis.set(key, response)
-    if (last_modified.to_date.mjd != sent.to_date.mjd)
-      FileUtils.mv(log_path, log_path.gsub("log", "log_#{last_modified.to_date}"))
-      FileUtils.rm(log_path)
+    if (last_modified.to_date.mjd != sent.to_date.mjd && File.exists?(log_path))
+      FileUtils.mv(log_path, log_path.gsub("megahal.log", "megahal_#{last_modified.to_date}.log"))
     end
     File.write(log_path, "#{sent.to_datetime.iso8601}|#{name}|#{message}\n", mode: "a+")
     File.write(log_path, "#{received.to_datetime.iso8601}|MegaHAL|#{response}\n", mode: "a+")
