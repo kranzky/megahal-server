@@ -1,5 +1,6 @@
 class ChatController < ApplicationController
   before_action :_set_redis, only: [:say]
+  before_action :_set_root_path, only: [:logs]
 
   def index
   end
@@ -11,6 +12,18 @@ class ChatController < ApplicationController
     @response = _megahal
     respond_to do |format|
       format.turbo_stream
+    end
+  end
+
+  def logs
+    file = params[:file]
+    if file.present?
+      path = File.join(@root_path, "log", file)
+      @lines = File.readlines(path).map(&:strip)
+    else
+      @files = Dir[File.join(@root_path, "log", "megahal*log")].map do |path|
+        File.basename(path)
+      end
     end
   end
 
@@ -34,5 +47,9 @@ class ChatController < ApplicationController
 
   def _set_redis
     @redis = Redis.new(url: ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" })
+  end
+
+  def _set_root_path
+    @root_path = ENV.fetch("MOUNT_PATH") { Rails.root.to_s }
   end
 end
