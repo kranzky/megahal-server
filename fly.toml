@@ -18,7 +18,7 @@ processes = []
 
 [env]
   PORT = "8080"
-  SERVER_COMMAND = "gem install foreman && foreman start"
+  SERVER_COMMAND = "./bin/prod"
 
 [experimental]
   allowed_public_ports = []
