@@ -6,6 +6,8 @@ MegaHAL Server is a Rails server that allows users to chat with [MegaHAL](https:
 
 You can [chat with MegaHAL online](https://megahal.kranzky.com) right now!
 
+[![MegaHAL Server Demo](https://raw.githubusercontent.com/kranzky/megahal-server/master/public/megahal.png)](https://megahal.kranzky.com)
+
 ### Setup
 
 This will install `redis` and `flyctl`, along with the various Ruby gems,
