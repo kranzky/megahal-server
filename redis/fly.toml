@@ -1,0 +1,22 @@
+# fly.toml file generated for megahal-redis on 2022-05-31T12:57:53+08:00
+
+app = "megahal-redis"
+
+kill_signal = "SIGINT"
+kill_timeout = 5
+processes = []
+
+[build]
+  image = "flyio/redis:6.2.6"
+
+[env]
+
+[experimental]
+  allowed_public_ports = []
+  auto_rollback = true
+
+[[services]]
+
+[[mounts]]
+  destination = "/data"
+  source = "redis_server"
