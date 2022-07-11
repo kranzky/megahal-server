@@ -18,7 +18,7 @@ processes = []
 
 [env]
   PORT = "8080"
-  SERVER_COMMAND = "bundle exec puma -C config/puma.rb"
+  SERVER_COMMAND = "bundle exec foreman start"
 
 [experimental]
   allowed_public_ports = []
@@ -54,3 +54,8 @@ processes = []
 [[statics]]
   guest_path = "/app/public"
   url_prefix = "/"
+
+[mounts]
+  source="megahal_data"
+  destination="/data"
+
