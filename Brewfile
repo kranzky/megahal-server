@@ -1,0 +1,2 @@
+brew "flyctl"
+brew "redis"
