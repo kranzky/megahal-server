@@ -3,6 +3,7 @@
 require 'redis'
 require 'megahal'
 require 'date'
+require 'profanity-filter'
 
 redis = Redis.new(url: ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" })
 root_path = ENV.fetch("MOUNT_PATH") { File.dirname(__dir__) }
@@ -20,6 +21,8 @@ megahal.load(brain_path) if File.exists?(brain_path)
 modified = false
 last_modified = Time.now.utc
 
+pf = ProfanityFilter.new
+
 while true
   redis.scan_each(match: "megahal-message:*").each do |key|
     data = JSON.parse(redis.getdel(key), symbolize_names: true)
@@ -29,7 +32,8 @@ while true
     message = data[:message]
     response = megahal.reply(message)
     key.gsub!("-message:", "-reply:")
-    redis.set(key, response)
+    filtered_response = pf.profane?(response) ? response.gsub(/[^ ,.!'"-_]/, "*") : response
+    redis.set(key, filtered_response)
     if (last_modified.to_date.mjd != sent.to_date.mjd && File.exists?(log_path))
       FileUtils.mv(log_path, log_path.gsub("megahal.log", "megahal_#{last_modified.to_date}.log"))
     end
