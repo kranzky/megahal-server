@@ -32,7 +32,8 @@ while true
     message = data[:message]
     response = megahal.reply(message)
     key.gsub!("-message:", "-reply:")
-    filtered_response = pf.profane?(response) ? response.gsub(/[^ ,.!'"-_]/, "*") : response
+    naughty_words = response.split(" ").select { |w| pf.profane?(w) }.sort_by { |w| -w.length }
+    filtered_response = naughty_words.reduce(response) { |a, b| a.gsub(b, "*" * b.length) }
     redis.set(key, filtered_response)
     if (last_modified.to_date.mjd != sent.to_date.mjd && File.exists?(log_path))
       FileUtils.mv(log_path, log_path.gsub("megahal.log", "megahal_#{last_modified.to_date}.log"))
